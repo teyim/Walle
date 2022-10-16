@@ -1,4 +1,4 @@
-name: action
+name: Readme update workflow
 on:
   schedule:
     # Runs every 24 hour
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  action:
+  update-Readme-workflow:
     name: Fetch repo data and generate readme file
     runs-on: ubuntu-latest
     steps:
