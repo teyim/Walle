@@ -10,7 +10,7 @@ const client = new octokit.Octokit({ auth: process.env.GH_ACCESS_TOKEN })
 let walleStats;
 // let ReadMe_DATA;
 
-fs.readFileSync("./walle.json", "utf8", (err, jsonString) => {
+fs.readFile("./walle.json", "utf8", (err, jsonString) => {
     if (err) {
         console.log("Error reading file from disk:", err);
         return;
@@ -57,7 +57,7 @@ async function getRecentCommits() {
             const allCommits = await Promise.all(commitPromise);
             for (const reponse of allCommits) {
                 //filter to get commits number
-                const commitCount = reponse.data.map(commit => commit.author.login).length;
+                const commitCount = reponse.data.filter(commit => commit.author.login === "teyim").map(commit => commit.author.login).length
                 console.log(commitCount)
                 commitsToday += commitCount
             }
