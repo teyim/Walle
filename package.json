@@ -1,0 +1,27 @@
+{
+  "name": "walle",
+  "version": "1.0.0",
+  "description": "A ReadME robot that evolves based on  github activity",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"node index",
+    "start:dev":"nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teyim/Walle.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/teyim/Walle/issues"
+  },
+  "homepage": "https://github.com/teyim/Walle#readme",
+  "dependencies": {
+    "@octokit/core": "^4.1.0",
+    "dotenv": "^16.0.3",
+    "nodemon": "^2.0.20"
+  }
+}
