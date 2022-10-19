@@ -17,7 +17,7 @@ jobs:
       - name: "create env file"
         run: |
           touch .env
-          echo GH_ACCESS_TOKEN=${{ secrets.GH_ACCESS_TOKEN }} > .env
+          echo GH_ACCESS_TOKEN=${{ secrets.GH_ACCESS_TOKEN }} >> .env
           cat .env
       - run: npm ci
         env:
