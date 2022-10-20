@@ -2,7 +2,7 @@ name: Readme update workflow
 on:
   schedule:
     # Runs every 24 hour
-    - cron: '* * * * *'
+    - cron: '0 0 * * *'
   workflow_dispatch:
 
 jobs:
@@ -23,3 +23,10 @@ jobs:
         env:
             GH_ACCESS_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
       - run: npm start || exit 0
+      - run: |-
+          git diff
+          git config --global user.email "teyimasobo@gmail.com"
+          git config --global user.name "teyim"
+          git diff --quiet || (git add README.md && git commit -m "Update the README.md file")
+          git diff --quiet || (git add walle.json && git commit -m "Update the walle.json file")
+          git push
