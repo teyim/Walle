@@ -103,7 +103,7 @@ function updateStats() {
             console.log('Successfully wrote file')
         }
     })
-    fs.writeFileSync('./README.md', ReadmeGen.generateReadme(walleStats.health, walleStats.level), err => {
+    fs.writeFileSync('./README.md', ReadmeGen.generateReadme(walleStats.health, walleStats.level, commitsToday), err => {
         if (err) {
             console.log('Error writing file', err)
         } else {
