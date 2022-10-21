@@ -28,7 +28,7 @@ const today = new Date()
 const yesterday = new Date(today)
 yesterday.setDate(yesterday.getDate() - 1)
 
-let commitsToday = 0;
+let commitsToday = -2;
 
 async function getRecentCommits() {
     try {
