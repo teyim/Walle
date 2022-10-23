@@ -1,4 +1,5 @@
 function generateReadme(health, level, commits) {
+    commits=commits>0?commits:0;
     return `
 <div style="text-align: center;" >
 
