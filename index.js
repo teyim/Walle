@@ -73,7 +73,7 @@ async function getRecentCommits() {
 }
 
 function updateStats() {
-    if (walleStats.level === 14 && walleStats.health === 100) {
+    if (walleStats.level === 12 && walleStats.health === 100) {
         return
     }
     if (commitsToday === 0) {
