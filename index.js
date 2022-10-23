@@ -28,7 +28,7 @@ const today = new Date()
 const yesterday = new Date(today)
 yesterday.setDate(yesterday.getDate() - 1)
 
-let commitsToday = 0;
+let commitsToday = -2;
 
 async function getRecentCommits() {
     try {
@@ -79,7 +79,7 @@ function updateStats() {
     if (commitsToday === 0) {
         if (walleStats.health !== 0) {
             if (walleStats.health >= 20) {
-                walleStats.health = walleStats.health - 20
+                walleStats.health = walleStats.health - 25
             }
             walleStats.health = 0
         }
@@ -88,7 +88,7 @@ function updateStats() {
         }
 
     }
-    const newHealth = commitsToday * 5
+    const newHealth = commitsToday/10 * 2
     walleStats.health = walleStats.health + newHealth
     while (walleStats.health > 100) {
         walleStats.level = walleStats.level + 1
