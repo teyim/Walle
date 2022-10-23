@@ -88,7 +88,7 @@ function updateStats() {
         }
 
     }
-    const newHealth = commitsToday/10 * 2
+    const newHealth = commitsToday * 2
     walleStats.health = walleStats.health + newHealth
     while (walleStats.health > 100) {
         walleStats.level = walleStats.level + 1
