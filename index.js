@@ -78,15 +78,17 @@ function updateStats() {
     }
     if (commitsToday === -2) {
         if (walleStats.health !== 0) {
-            if (walleStats.health >= 20) {
+            if (walleStats.health >= 25) {
                 walleStats.health = walleStats.health - 25
             }
+            else{
             walleStats.health = 0
+            }
         }
-        if (walleStats.level !== 1) {
+        if (walleStats.level > 1) {
             walleStats.level = walleStats.level - 1
         }
-        walleStats.health = 0
+        
 
     }
     else{
