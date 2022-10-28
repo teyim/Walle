@@ -1,8 +1,8 @@
 name: Readme update workflow
 on:
   schedule:
-    # Runs every 24 hour
-    - cron: '0 0 * * *'
+    # Runs every 7 days
+    - cron: '0 0 * * 0'
   workflow_dispatch:
 
 jobs:
