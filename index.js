@@ -76,7 +76,7 @@ function updateStats() {
     if (walleStats.level === 12 && walleStats.health === 100) {
         return
     }
-    if (commitsToday === 0) {
+    if (commitsToday === -2) {
         if (walleStats.health !== 0) {
             if (walleStats.health >= 20) {
                 walleStats.health = walleStats.health - 25
@@ -88,11 +88,13 @@ function updateStats() {
         }
 
     }
+    else{
     const newHealth = commitsToday * 2
     walleStats.health = walleStats.health + newHealth
     while (walleStats.health > 100) {
         walleStats.level = walleStats.level + 1
         walleStats.health = walleStats.health - 100
+    }
     }
     console.log(walleStats)
     const jsonString = JSON.stringify(walleStats)
