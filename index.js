@@ -7,7 +7,7 @@ const ReadmeGen = require("./ReadmeGen")
 
 const client = new octokit.Octokit({ auth: process.env.GH_ACCESS_TOKEN })
 
-let walleStats;
+let walleStats = {};
 // let ReadMe_DATA;
 
 fs.readFile("./walle.json", "utf8", (err, jsonString) => {
@@ -25,10 +25,10 @@ fs.readFile("./walle.json", "utf8", (err, jsonString) => {
 
 
 const today = new Date()
-const yesterday = new Date(today)
-yesterday.setDate(yesterday.getDate() - 1)
+const last7days = new Date(today)
+last7days.setDate(last7days.getDate() - 7)
 
-let commitsToday = -2;
+let commitsThisWeek = -2;
 
 async function getRecentCommits() {
     try {
@@ -45,11 +45,11 @@ async function getRecentCommits() {
 
         //get array of promises
         const commitPromise = repos.data.map(repo => {
-            //get commits from last 24 hours by done by me
+            //get commits from last 7 days by done by me
             return client.request('GET /repos/{owner}/{repo}/commits', {
                 owner: repo.owner.login,
                 repo: repo.name,
-                since: yesterday.toISOString()
+                since: last7days.toISOString()
             })
         })
         try {
@@ -59,7 +59,7 @@ async function getRecentCommits() {
                 //filter to get commits number
                 const commitCount = reponse.data.filter(commit => commit.author.login === "teyim").map(commit => commit.author.login).length
                 console.log(commitCount)
-                commitsToday += commitCount
+                commitsThisWeek += commitCount
             }
         } catch (error) {
             console.log(error)
@@ -68,7 +68,7 @@ async function getRecentCommits() {
     } catch (error) {
         console.log(error)
     }
-    console.log(commitsToday)
+    console.log(commitsThisWeek)
     updateStats()
 }
 
@@ -76,24 +76,26 @@ function updateStats() {
     if (walleStats.level === 12 && walleStats.health === 100) {
         return
     }
-    if (commitsToday === -2) {
+    if (commitsThisWeek === -2) {
         if (walleStats.health >= 25 && walleStats.level > 1) {
-         walleStats.health = walleStats.health - 25
-         walleStats.level = walleStats.level - 1
-         }
-         else{
-         walleStats.health = 0
-         walleStats.level = 0
-         }
+            walleStats.health = walleStats.health - 25
+            walleStats.level = walleStats.level - 1
+        }
+        else {
+            walleStats.health = 0
+            walleStats.level = 0
+        }
     }
-    else{
-    const newHealth = commitsToday * 2
-    walleStats.health = walleStats.health + newHealth
-    while (walleStats.health > 100) {
-        walleStats.level = walleStats.level + 1
-        walleStats.health = walleStats.health - 100
+    else {
+        const newHealth = Math.floor(commitsThisWeek / 7)
+        walleStats.health = walleStats.health + newHealth
+        while (walleStats.health > 100) {
+            walleStats.level = walleStats.level + 1
+            walleStats.health = walleStats.health - 100
+        }
     }
-    }
+
+    walleStats.health = Math.floor(walleStats.health)
     console.log(walleStats)
     const jsonString = JSON.stringify(walleStats)
     fs.writeFileSync('./walle.json', jsonString, err => {
@@ -103,7 +105,7 @@ function updateStats() {
             console.log('Successfully wrote file')
         }
     })
-    fs.writeFileSync('./README.md', ReadmeGen.generateReadme(walleStats.health, walleStats.level, commitsToday), err => {
+    fs.writeFileSync('./README.md', ReadmeGen.generateReadme(walleStats.health, walleStats.level, commitsThisWeek), err => {
         if (err) {
             console.log('Error writing file', err)
         } else {
