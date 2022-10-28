@@ -86,6 +86,7 @@ function updateStats() {
         if (walleStats.level !== 1) {
             walleStats.level = walleStats.level - 1
         }
+        walleStats.health = 0
 
     }
     else{
