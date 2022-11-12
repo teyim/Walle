@@ -2,6 +2,7 @@ const fs = require("fs");
 require("dotenv").config();
 const octokit = require("@octokit/core");
 const ReadmeGen = require("./ReadmeGen")
+const fetch = require("node-fetch");
 
 
 
@@ -98,6 +99,12 @@ function updateStats() {
     walleStats.health = Math.floor(walleStats.health)
     console.log(walleStats)
     const jsonString = JSON.stringify(walleStats)
+
+    fetch(`https://facile-one.vercel.app/api/og?level=${walleStats.level}&commits=${commitsThisWeek}&health=${walleStats.health}`)
+        .then(res =>
+            res.body.pipe(fs.createWriteStream('./image.png'))
+        )
+
     fs.writeFileSync('./walle.json', jsonString, err => {
         if (err) {
             console.log('Error writing file', err)
@@ -105,13 +112,7 @@ function updateStats() {
             console.log('Successfully wrote file')
         }
     })
-    fs.writeFileSync('./README.md', ReadmeGen.generateReadme(walleStats.health, walleStats.level, commitsThisWeek), err => {
-        if (err) {
-            console.log('Error writing file', err)
-        } else {
-            console.log('Successfully wrote file')
-        }
-    })
+
 }
 
 
