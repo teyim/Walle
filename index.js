@@ -2,6 +2,7 @@ const fs = require("fs");
 require("dotenv").config();
 const octokit = require("@octokit/core");
 const fetch = require("node-fetch");
+const ReadmeGen = require("./ReadmeGen")
 
 const client = new octokit.Octokit({ auth: process.env.GH_ACCESS_TOKEN })
 
@@ -103,6 +104,13 @@ function updateStats() {
         )
 
     fs.writeFileSync('./walle.json', jsonString, err => {
+        if (err) {
+            console.log('Error writing file', err)
+        } else {
+            console.log('Successfully wrote file')
+        }
+    })
+    fs.writeFileSync('./README.md', ReadmeGen.generateReadme(), err => {
         if (err) {
             console.log('Error writing file', err)
         } else {
