@@ -1,10 +1,7 @@
 const fs = require("fs");
 require("dotenv").config();
 const octokit = require("@octokit/core");
-const ReadmeGen = require("./ReadmeGen")
 const fetch = require("node-fetch");
-
-
 
 const client = new octokit.Octokit({ auth: process.env.GH_ACCESS_TOKEN })
 
