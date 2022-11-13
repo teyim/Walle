@@ -13,5 +13,6 @@ A dynamic image in readMe powered by vercel-og and Githup api, which shows me we
 -I have nodejs script that fetches commits from last 1 week from the github API(excluding github action commits) and updates the health and current level based on that. This script then runs every 7 days using github action.
 
 -To generate the image, i have a template built with tailwindcss in a nextjs API route that uses vercel-og to generate the image..and i simply just use query params to pass the current level, health and commits and get back the corresponding image
+
 </div>
     
