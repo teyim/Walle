@@ -21,8 +21,6 @@ fs.readFile("./walle.json", "utf8", (err, jsonString) => {
     }
 });
 
-
-
 const today = new Date()
 const last7days = new Date(today)
 last7days.setDate(last7days.getDate() - 7)
@@ -100,8 +98,9 @@ function updateStats() {
 
     fetch(`https://facile-one.vercel.app/api/og?level=${walleStats.level}&commits=${commitsThisWeek}&health=${walleStats.health}`)
         .then(res =>
-            res.body.pipe(fs.createWriteStream('./image.png'))
+            res.body.pipe(fs.createWriteStream('image.png'))
         )
+
 
     fs.writeFileSync('./walle.json', jsonString, err => {
         if (err) {
@@ -119,8 +118,5 @@ function updateStats() {
     })
 
 }
-
-
-
 
 getRecentCommits();
