@@ -1,8 +1,8 @@
 
 <div style="text-align: center;" >
 
-![walle image](./image.png)
-
+![Walle](image.png)
+   
 ## WALLE
 A dynamic image in readMe powered by vercel-og and Githup api, which shows me weekly updates of my coding activities on github.
 
