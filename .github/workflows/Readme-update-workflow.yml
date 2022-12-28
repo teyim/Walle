@@ -27,6 +27,5 @@ jobs:
           git diff
           git config --global user.email "teyimasobo@gmail.com"
           git config --global user.name "teyim"
-          git diff --quiet || (git add walle.json && git commit -m "Update the walle.json file")
-          git diff --quiet || (git add image.png && git commit -m "Update the image.png file")
+          git diff --quiet || (git add . && git commit -m "Update files")
           git push
