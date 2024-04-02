@@ -4,7 +4,7 @@
 ![walle image](./image.png)
 
 ## WALLE
-A dynamic image in readMe powered by vercel-og and Githup api, which shows me weekly updates of my coding activities on github.
+<b>A dynamic image in readMe powered by vercel-og and Githup api, which shows me weekly updates of my coding activities on github.</b>
 
 ### How it works
 -Walle has various stages and healths. The more i commit code, the more it increasing in health and  evolves to a higher level. And when i commit less/no code, its health reduces and eventually reverts back to the previous stage.
