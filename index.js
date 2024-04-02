@@ -7,7 +7,7 @@ const ReadmeGen = require("./ReadmeGen");
 const client = new octokit.Octokit({ auth: process.env.GH_ACCESS_TOKEN });
 
 let walleStats = {};
-// let ReadMe_DATA;
+
 
 fs.readFile("./walle.json", "utf8", (err, jsonString) => {
   if (err) {
